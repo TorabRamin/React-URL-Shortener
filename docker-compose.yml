@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+    # The application
+    rus-app:
+      build: .
+      ports:
+        - 3000:3000
+      volumes:
+        - ./src:/opt/app/src
+      environment:
+        - PORT=3000
+        - DATABASE=postgres://postgres:secret@rus-postgres:5432/rus
+      depends_on:
+        - rus-postgres
+    # Database server
+    rus-postgres:
+      image: postgres:12-alpine
+      environment:
+        - POSTGRES_PASSWORD=secret
+        - POSTGRES_DB=rus
+      logging:
+        driver: none
