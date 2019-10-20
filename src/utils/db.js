@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 
-const CONNECTION_STRING = process.env.DATABASE || "postgres://postgres:secret@localhost:5432/urls";
+const CONNECTION_STRING = process.env.DATABASE || "postgres://postgres:secret@localhost:5432/rus";
 
-const db = new Sequelize();
+const db = new Sequelize(CONNECTION_STRING);
 
 const User = db.define('users' ,{
     name:Sequelize.TEXT,
