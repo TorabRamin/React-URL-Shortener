@@ -25,6 +25,23 @@ router.post('/api/v1/redirects',entryValidator,rejectInvalid,async (req,res,next
     }
 })
 
+router.get('/api/v1/redirects', async(req,res)=>{
+    let [dberr,myDirections] = await _p(Direction.findAll({
+        where:{
+            user_id:req.user.id
+        }
+    }));
+    if(dberr) return next(dberr);
+    return res.json(myDirections.map(d=>{
+        return {
+            id:d.id,
+            destination:d.destination,
+            hash:d.hash,
+            created_at:d.createdAt
+        }
+    }));
+});
+
 
 
 module.exports = router;
