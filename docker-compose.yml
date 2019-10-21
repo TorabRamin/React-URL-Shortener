@@ -11,6 +11,7 @@ services:
       environment:
         - PORT=3000
         - DATABASE=postgres://postgres:secret@rus-postgres:5432/rus
+        - CORS=yes
       depends_on:
         - rus-postgres
     # Database server
